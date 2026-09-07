@@ -1,0 +1,11 @@
+# Visual Studio
+.vs/
+
+# Dependencias descargadas
+packages/
+
+# Archivos de usuario y compilación
+*.user
+*.suo
+bin/
+obj/
