@@ -11,7 +11,7 @@ namespace TP4_GRUPO_11
 {
     public partial class Ejercicio2 : System.Web.UI.Page
     {
-        private const string cadenaConexion = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Neptuno;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+        private const string cadenaConexion = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Neptuno;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
