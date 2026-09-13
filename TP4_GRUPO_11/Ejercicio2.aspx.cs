@@ -29,7 +29,7 @@ namespace TP4_GRUPO_11
                 gvProductos.DataSource = ds.Tables["Productos"];
                 gvProductos.DataBind();
 
-                conexion.Close()
+                conexion.Close();
             }
         }
     }
