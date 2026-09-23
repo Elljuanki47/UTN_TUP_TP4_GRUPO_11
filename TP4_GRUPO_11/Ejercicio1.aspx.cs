@@ -39,5 +39,60 @@ namespace TP4_GRUPO_11
                 conexion.Close();
             }
         }
+        protected void ddlProvinciaInicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarLocalidadesInicio();
+        }
+
+        private void CargarLocalidadesInicio()
+        {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string consulta = "SELECT IdLocalidad, NombreLocalidad FROM Localidades WHERE IdProvincia = @IdProvincia";
+
+            SqlCommand comando = new SqlCommand(consulta, conexion);
+            comando.Parameters.AddWithValue("@IdProvincia", ddlProvinciaInicio.SelectedValue);
+
+            SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+            DataSet ds = new DataSet();
+            adaptador.Fill(ds, "Localidades");
+
+            ddlLocalidadInicio.DataSource = ds.Tables["Localidades"];
+            ddlLocalidadInicio.DataTextField = "NombreLocalidad";
+            ddlLocalidadInicio.DataValueField = "IdLocalidad";
+            ddlLocalidadInicio.DataBind();
+
+            conexion.Close();
+        }
+
+        protected void ddlProvinciaFinal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarLocalidadesFinal();
+        }
+
+        private void CargarLocalidadesFinal()
+        {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string consulta = "SELECT IdLocalidad, NombreLocalidad FROM Localidades WHERE IdProvincia = @IdProvincia";
+
+            SqlCommand comando = new SqlCommand(consulta, conexion);
+            comando.Parameters.AddWithValue("@IdProvincia", ddlProvinciaFinal.SelectedValue);
+
+            SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+            DataSet ds2 = new DataSet();
+            adaptador.Fill(ds2, "Localidades");
+
+            ddlLocalidadFinal.DataSource = ds2.Tables["Localidades"];
+            ddlLocalidadFinal.DataTextField = "NombreLocalidad";
+            ddlLocalidadFinal.DataValueField = "IdLocalidad";
+            ddlLocalidadFinal.DataBind();
+
+            conexion.Close();
+        }
     }
 }

@@ -12,19 +12,22 @@
             <h3>DESTINO INICIO</h3>
 
             Provincia:
-            <asp:DropDownList ID="ddlProvinciaInicio" runat="server">
+            <asp:DropDownList ID="ddlProvinciaInicio" runat="server"
+                AutoPostBack="true"
+                OnSelectedIndexChanged="ddlProvinciaInicio_SelectedIndexChanged">
             </asp:DropDownList>
-            
+
             <br />
-            
+
             Localidad:
             <asp:DropDownList ID="ddlLocalidadInicio" runat="server">
             </asp:DropDownList>
-            
             <h3>DESTINO FINAL</h3>
             
             Provincia:
-            <asp:DropDownList ID="ddlProvinciaFinal" runat="server">
+            <asp:DropDownList ID="ddlProvinciaFinal" runat="server"
+                AutoPostBack="true"
+                OnSelectedIndexChanged="ddlProvinciaFinal_SelectedIndexChanged">
             </asp:DropDownList>
             
             <br />
