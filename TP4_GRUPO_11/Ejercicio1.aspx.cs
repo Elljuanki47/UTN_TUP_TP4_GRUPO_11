@@ -40,6 +40,9 @@ namespace TP4_GRUPO_11
                 CargarLocalidadesFinal();
 
                 conexion.Close();
+                ListItem item = new ListItem("--Seleccione una provincia--", "0");
+                ddlProvinciaInicio.Items.Add(item);
+                ddlProvinciaInicio.SelectedValue = "0";
             }
         }
         private void CargarProvinciasFinal()
@@ -95,8 +98,12 @@ namespace TP4_GRUPO_11
             ddlLocalidadInicio.DataTextField = "NombreLocalidad";
             ddlLocalidadInicio.DataValueField = "IdLocalidad";
             ddlLocalidadInicio.DataBind();
-
+            
             conexion.Close();
+
+            ListItem item = new ListItem("--Seleccione una localidad--", "0");
+            ddlLocalidadInicio.Items.Add(item);
+            ddlLocalidadInicio.SelectedValue = "0";
         }
 
         protected void ddlProvinciaFinal_SelectedIndexChanged(object sender, EventArgs e)
