@@ -36,6 +36,9 @@ namespace TP4_GRUPO_11
                 ddlProvinciaFinal.DataValueField = "IdProvincia";
                 ddlProvinciaFinal.DataBind();
 
+                CargarLocalidadesInicio();
+                CargarLocalidadesFinal();
+
                 conexion.Close();
             }
         }
@@ -69,6 +72,7 @@ namespace TP4_GRUPO_11
         {
             CargarLocalidadesInicio();
             CargarProvinciasFinal();
+            CargarLocalidadesFinal();
         }
 
 
