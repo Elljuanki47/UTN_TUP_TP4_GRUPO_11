@@ -39,10 +39,38 @@ namespace TP4_GRUPO_11
                 conexion.Close();
             }
         }
+        private void CargarProvinciasFinal()
+        {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string consulta = @"SELECT IdProvincia, NombreProvincia
+                        FROM Provincias
+                        WHERE IdProvincia <> @IdProvincia";
+
+            SqlCommand comando = new SqlCommand(consulta, conexion);
+            comando.Parameters.AddWithValue("@IdProvincia",
+                                            ddlProvinciaInicio.SelectedValue);
+
+            SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+            DataSet ds = new DataSet();
+            adaptador.Fill(ds, "Provincias");
+
+            ddlProvinciaFinal.DataSource = ds.Tables["Provincias"];
+            ddlProvinciaFinal.DataTextField = "NombreProvincia";
+            ddlProvinciaFinal.DataValueField = "IdProvincia";
+            ddlProvinciaFinal.DataBind();
+
+            conexion.Close();
+        }
+
         protected void ddlProvinciaInicio_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarLocalidadesInicio();
+            CargarProvinciasFinal();
         }
+
 
         private void CargarLocalidadesInicio()
         {
