@@ -33,5 +33,10 @@ namespace TP4_GRUPO_11
                 conexion.Close();
             }
         }
+        protected void lbVerLibros_Click(object sender, EventArgs e)
+        {
+            pnlSeleccion.Visible = false;
+            pnlListado.Visible = true;
+        }
     }
 }

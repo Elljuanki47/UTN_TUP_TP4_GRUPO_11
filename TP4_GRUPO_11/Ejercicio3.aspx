@@ -9,10 +9,19 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            Seleccionar Tema:
+         <asp:Panel ID="pnlSeleccion" runat="server">
+             Seleccionar Tema:
+    
+         <asp:DropDownList ID="ddlTemas" runat="server"></asp:DropDownList>
+         <br /><br />
+         <asp:LinkButton ID="lbVerLibros" runat="server" OnClick="lbVerLibros_Click"> 
+             Ver libros
+        </asp:LinkButton>            
+        </asp:Panel>
 
-            <asp:DropDownList ID="ddlTemas" runat="server">
-            </asp:DropDownList>
+            <asp:Panel ID="pnlListado" runat="server" Visible="false">
+            <h2>Listado de Libros</h2>
+            </asp:Panel>
         </div>
     </form>
 </body>
