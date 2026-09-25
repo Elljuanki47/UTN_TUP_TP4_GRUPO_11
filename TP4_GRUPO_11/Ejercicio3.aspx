@@ -20,7 +20,9 @@
         </asp:Panel>
 
             <asp:Panel ID="pnlListado" runat="server" Visible="false">
-            <h2>Listado de Libros</h2>
+                <h2>Listado de Libros</h2>
+                <asp:GridView ID="gvLibros" runat="server">
+                </asp:GridView>
             </asp:Panel>
         </div>
     </form>

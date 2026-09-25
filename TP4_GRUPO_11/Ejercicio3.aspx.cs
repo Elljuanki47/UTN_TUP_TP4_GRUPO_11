@@ -33,10 +33,29 @@ namespace TP4_GRUPO_11
                 conexion.Close();
             }
         }
+
         protected void lbVerLibros_Click(object sender, EventArgs e)
         {
             pnlSeleccion.Visible = false;
             pnlListado.Visible = true;
+
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string consulta = "SELECT * FROM Libros WHERE IdTema = @IdTema";
+
+            SqlCommand comando = new SqlCommand(consulta, conexion);
+            comando.Parameters.AddWithValue("@IdTema", ddlTemas.SelectedValue);
+
+            SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+            DataSet ds = new DataSet();
+            adaptador.Fill(ds, "Libros");
+
+            gvLibros.DataSource = ds.Tables["Libros"];
+            gvLibros.DataBind();
+
+            conexion.Close();
         }
     }
 }
