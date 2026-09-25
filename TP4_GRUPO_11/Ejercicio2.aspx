@@ -9,8 +9,34 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="gvProductos" runat="server">
-            </asp:GridView>
+            
+    Id Producto:
+    <asp:DropDownList ID="ddlOperadorProducto" runat="server">
+        <asp:ListItem Text="Igual a:" Value="="></asp:ListItem>
+        <asp:ListItem Text="Mayor a:" Value=">"></asp:ListItem>
+        <asp:ListItem Text="Menor a:" Value="<"></asp:ListItem>
+    </asp:DropDownList>
+    <asp:TextBox ID="txtIdProducto" runat="server"></asp:TextBox>
+
+    <br />
+
+    IdCategoria:
+    <asp:DropDownList ID="ddlOperadorCategoria" runat="server">
+        <asp:ListItem Text="Igual a:" Value="="></asp:ListItem>
+        <asp:ListItem Text="Mayor a:" Value=">"></asp:ListItem>
+        <asp:ListItem Text="Menor a:" Value="<"></asp:ListItem>
+    </asp:DropDownList>
+    <asp:TextBox ID="txtIdCategoria" runat="server"></asp:TextBox>
+
+    <br /><br />
+
+    <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" />
+    <asp:Button ID="btnQuitarFiltro" runat="server" Text="Quitar filtro" />
+
+    <br /><br />
+
+    <asp:GridView ID="gvProductos" runat="server">
+    </asp:GridView>
         </div>
     </form>
 </body>

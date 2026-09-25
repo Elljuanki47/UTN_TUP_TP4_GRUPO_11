@@ -32,5 +32,58 @@ namespace TP4_GRUPO_11
                 conexion.Close();
             }
         }
+
+       protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            if (txtIdProducto.Text.Trim() != "")
+            {
+                SqlConnection conexion = new SqlConnection(cadenaConexion);
+                conexion.Open();
+
+                string operador = ddlOperadorProducto.SelectedValue;
+
+                string consulta = "SELECT * FROM Productos WHERE IdProducto "
+                                 + operador + " @IdProducto";
+
+                SqlCommand comando = new SqlCommand(consulta, conexion);
+
+                comando.Parameters.AddWithValue("@IdProducto",
+                    Convert.ToInt32(txtIdProducto.Text));
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+                DataSet ds = new DataSet();
+                adaptador.Fill(ds, "Productos");
+
+                gvProductos.DataSource = ds.Tables["Productos"];
+                gvProductos.DataBind();
+
+                conexion.Close();
+            }
+
+            else if (txtIdCategoria.Text.Trim() != "")
+            {
+                SqlConnection conexion = new SqlConnection(cadenaConexion);
+                conexion.Open();
+
+                string operador = ddlOperadorCategoria.SelectedValue;
+
+                string consulta = "SELECT * FROM Productos WHERE IdCategoría " + operador + " @IdCategoría";
+
+                SqlCommand comando = new SqlCommand(consulta, conexion);
+
+                comando.Parameters.AddWithValue("@IdCategoría", Convert.ToInt32(txtIdCategoria.Text));
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+                DataSet ds = new DataSet();
+                adaptador.Fill(ds, "Productos");
+
+                gvProductos.DataSource = ds.Tables["Productos"];
+                gvProductos.DataBind();
+
+                conexion.Close();
+            }
+        }
     }
 }
