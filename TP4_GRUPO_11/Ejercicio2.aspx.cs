@@ -61,7 +61,7 @@ namespace TP4_GRUPO_11
                 conexion.Close();
             }
 
-            else if (txtIdCategoria.Text.Trim() != "")
+            if (txtIdCategoria.Text.Trim() != "")
             {
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
                 conexion.Open();
@@ -84,6 +84,24 @@ namespace TP4_GRUPO_11
 
                 conexion.Close();
             }
+        }
+
+        protected void btnQuitarFiltro_Click(object sender, EventArgs e)
+        {
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string consulta = "SELECT * FROM Productos";
+
+            SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conexion);
+
+            DataSet ds = new DataSet();
+            adaptador.Fill(ds, "Productos");
+
+            gvProductos.DataSource = ds.Tables["Productos"];
+            gvProductos.DataBind();
+
+            conexion.Close();
         }
     }
 }
