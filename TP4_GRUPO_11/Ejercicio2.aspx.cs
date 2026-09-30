@@ -14,6 +14,8 @@ namespace TP4_GRUPO_11
         private const string cadenaConexion = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Neptuno;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
+            UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
+
             if (!IsPostBack)
             {
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
@@ -35,8 +37,58 @@ namespace TP4_GRUPO_11
 
        protected void btnFiltrar_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid)
+            {
+                return;
+            }
+            if (txtIdProducto.Text.Trim() == "" && txtIdCategoria.Text.Trim() == "")
+            {
+                lblCompletar.Text = "No pueden quedar ambos espacios vacios";
+                return;
+            }
+
+            if (txtIdProducto.Text.Trim() != "" && txtIdCategoria.Text.Trim() != "")
+            {
+                lblCompletar.Text = "";
+
+                SqlConnection conexion = new SqlConnection(cadenaConexion);
+                conexion.Open();
+
+                string operadorProducto = ddlOperadorProducto.SelectedValue;
+                string operadorCategoria = ddlOperadorCategoria.SelectedValue;
+
+                string consulta =
+                    "SELECT * FROM Productos WHERE IdProducto " + operadorProducto +
+                    " @IdProducto AND IdCategoría " + operadorCategoria +
+                    " @IdCategoria";
+
+                SqlCommand comando = new SqlCommand(consulta, conexion);
+
+                comando.Parameters.AddWithValue("@IdProducto",
+                    Convert.ToInt32(txtIdProducto.Text));
+
+                comando.Parameters.AddWithValue("@IdCategoria",
+                    Convert.ToInt32(txtIdCategoria.Text));
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+                DataSet ds = new DataSet();
+                adaptador.Fill(ds, "Productos");
+
+                gvProductos.DataSource = ds.Tables["Productos"];
+                gvProductos.DataBind();
+
+                conexion.Close();
+
+                txtIdProducto.Text = "";
+                txtIdCategoria.Text = "";
+
+                return;
+            }
+
             if (txtIdProducto.Text.Trim() != "")
             {
+                lblCompletar.Text = "";
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
                 conexion.Open();
 
@@ -59,10 +111,17 @@ namespace TP4_GRUPO_11
                 gvProductos.DataBind();
 
                 conexion.Close();
+
+                txtIdProducto.Text = "";
+                txtIdCategoria.Text = "";
+
+                return;
             }
 
             if (txtIdCategoria.Text.Trim() != "")
             {
+                lblCompletar.Text = "";
+
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
                 conexion.Open();
 
@@ -83,7 +142,50 @@ namespace TP4_GRUPO_11
                 gvProductos.DataBind();
 
                 conexion.Close();
+
+                txtIdProducto.Text = "";
+                txtIdCategoria.Text = "";
+
+                return;
             }
+            if (txtIdProducto.Text.Trim() == "" && txtIdCategoria.Text.Trim() == "")
+            {
+                lblCompletar.Text = "";
+                SqlConnection conexion = new SqlConnection(cadenaConexion);
+                conexion.Open();
+
+                string consulta = "SELECT * FROM Productos";
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conexion);
+
+                DataSet ds = new DataSet();
+                adaptador.Fill(ds, "Productos");
+
+                gvProductos.DataSource = ds.Tables["Productos"];
+                gvProductos.DataBind();
+
+                conexion.Close();
+            }
+        }
+
+        protected void btnQuitarFiltro_Click(object sender, EventArgs e)
+        {
+            lblCompletar.Text = "";
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            conexion.Open();
+
+            string consulta = "SELECT * FROM Productos";
+
+            SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conexion);
+
+            DataSet ds = new DataSet();
+            adaptador.Fill(ds, "Productos");
+
+            gvProductos.DataSource = ds.Tables["Productos"];
+            gvProductos.DataBind();
+
+            conexion.Close();
+
         }
 
         protected void btnQuitarFiltro_Click(object sender, EventArgs e)
