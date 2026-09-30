@@ -36,13 +36,29 @@ namespace TP4_GRUPO_11
                 ddlProvinciaFinal.DataValueField = "IdProvincia";
                 ddlProvinciaFinal.DataBind();
 
-                CargarLocalidadesInicio();
-                CargarLocalidadesFinal();
-
                 conexion.Close();
+<<<<<<< HEAD
                 ListItem item = new ListItem("--Seleccione una provincia--", "0");
                 ddlProvinciaInicio.Items.Add(item);
                 ddlProvinciaInicio.SelectedValue = "0";
+=======
+
+                ddlProvinciaInicio.Items.Insert(
+                    0, new ListItem("--Seleccione una provincia--", "0"));
+                ddlProvinciaInicio.SelectedValue = "0";
+
+                ddlLocalidadInicio.Items.Clear();
+                ddlLocalidadInicio.Items.Add(
+                    new ListItem("--Seleccione una localidad--", "0"));
+
+                ddlProvinciaFinal.Items.Clear();
+                ddlProvinciaFinal.Items.Add(
+                    new ListItem("--Seleccione una provincia de inicio--", "0"));
+
+                ddlLocalidadFinal.Items.Clear();
+                ddlLocalidadFinal.Items.Add(
+                    new ListItem("--Seleccione una localidad--", "0"));
+>>>>>>> 8edaa12 (Finalizo ejercicio 1)
             }
         }
         private void CargarProvinciasFinal()
@@ -69,10 +85,31 @@ namespace TP4_GRUPO_11
             ddlProvinciaFinal.DataBind();
 
             conexion.Close();
+
+            ListItem item = new ListItem("--Seleccione una provincia--", "0");
+            ddlProvinciaFinal.Items.Add(item);
+            ddlProvinciaFinal.SelectedValue = "0";
         }
 
         protected void ddlProvinciaInicio_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ddlProvinciaInicio.SelectedValue == "0")
+            {
+                ddlLocalidadInicio.Items.Clear();
+                ddlLocalidadInicio.Items.Add(
+                    new ListItem("--Seleccione una localidad--", "0"));
+
+                ddlProvinciaFinal.Items.Clear();
+                ddlProvinciaFinal.Items.Add(
+                    new ListItem("--Seleccione una provincia de inicio--", "0"));
+
+                ddlLocalidadFinal.Items.Clear();
+                ddlLocalidadFinal.Items.Add(
+                    new ListItem("--Seleccione una localidad--", "0"));
+
+                return;
+            }
+
             CargarLocalidadesInicio();
             CargarProvinciasFinal();
             CargarLocalidadesFinal();
@@ -132,6 +169,51 @@ namespace TP4_GRUPO_11
             ddlLocalidadFinal.DataBind();
 
             conexion.Close();
+
+            ListItem item = new ListItem("--Seleccione una localidad--", "0");
+            ddlLocalidadFinal.Items.Add(item);
+            ddlLocalidadFinal.SelectedValue = "0";
+        }
+
+        protected void btnGenerarBoleto_Click(object sender, EventArgs e)
+        {
+            if (ddlLocalidadInicio.SelectedValue == "0" && ddlLocalidadFinal.SelectedValue != "0")
+            {
+                lblBoleto.Text = "Seleccione una localidad de inicio";
+                return;
+            }
+
+            if (ddlLocalidadInicio.SelectedValue != "0" && ddlLocalidadFinal.SelectedValue == "0")
+            {
+                lblBoleto.Text = "Seleccione una localidad de destino.";
+                return;
+            }
+
+            if (ddlLocalidadInicio.SelectedValue == "0" || ddlLocalidadFinal.SelectedValue == "0")
+            {
+                lblBoleto.Text = "Seleccione una localidad de inicio y una de destino.";
+                return;
+            }
+
+            lblBoleto.Text = "Inicio: " + ddlProvinciaInicio.SelectedItem.Text + " - " + ddlLocalidadInicio.SelectedItem.Text +
+            "<br />" + "Destino: " + ddlProvinciaFinal.SelectedItem.Text + " - " + ddlLocalidadFinal.SelectedItem.Text;
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            ddlProvinciaInicio.SelectedValue = "0";
+            ddlProvinciaFinal.SelectedValue = "0";
+
+            ddlLocalidadInicio.Items.Clear();
+            ddlLocalidadFinal.Items.Clear();
+
+            ddlLocalidadInicio.Items.Add(new ListItem("--Seleccione una localidad--", "0"));
+            ddlLocalidadFinal.Items.Add(new ListItem("--Seleccione una localidad--", "0"));
+
+            ddlLocalidadInicio.SelectedValue = "0";
+            ddlLocalidadFinal.SelectedValue = "0";
+
+            lblBoleto.Text = "";
         }
     }
 }

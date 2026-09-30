@@ -35,6 +35,25 @@
             Localidad:
             <asp:DropDownList ID="ddlLocalidadFinal" runat="server">
             </asp:DropDownList>
+
+            <br />
+            <br />
+
+            <asp:Button ID="btnGenerarBoleto" runat="server" 
+                Text="Generar Boleto" 
+                OnClick="btnGenerarBoleto_Click" />
+
+            <asp:Button ID="btnLimpiar" runat="server"
+                Text="Limpiar Seleccion"
+                OnClick="btnLimpiar_Click" />
+
+            <br />
+            <br />
+
+            <asp:Label ID="lblBoleto" runat="server" 
+                Font-Size="14pt" Font-Bold="True"
+                ForeColor="Yellow"></asp:Label>
+
         </div>
     </form>
 </body>
