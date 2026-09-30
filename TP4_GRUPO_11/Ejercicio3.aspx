@@ -9,21 +9,24 @@
 <body>
     <form id="form1" runat="server">
         <div>
-         <asp:Panel ID="pnlSeleccion" runat="server">
-             Seleccionar Tema:
-    
-         <asp:DropDownList ID="ddlTemas" runat="server"></asp:DropDownList>
-         <br /><br />
-         <asp:LinkButton ID="lbVerLibros" runat="server" OnClick="lbVerLibros_Click"> 
-             Ver libros
-        </asp:LinkButton>            
-        </asp:Panel>
 
-            <asp:Panel ID="pnlListado" runat="server" Visible="false">
-                <h2>Listado de Libros</h2>
-                <asp:GridView ID="gvLibros" runat="server">
-                </asp:GridView>
-            </asp:Panel>
+            Seleccionar Tema:
+
+            <asp:DropDownList ID="ddlTemas" runat="server">
+            </asp:DropDownList>
+
+            <br /><br />
+
+            <asp:Label ID="lblMensaje" runat="server"
+                ForeColor="Red"
+                Visible="False">
+            </asp:Label>
+
+            <asp:LinkButton ID="lbVerLibros" runat="server"
+                OnClick="lbVerLibros_Click">
+                Ver libros
+            </asp:LinkButton>
+
         </div>
     </form>
 </body>

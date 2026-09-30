@@ -11,7 +11,7 @@ namespace TP4_GRUPO_11
 {
 
 
-    public partial class Ejercicio3
+    public partial class ListadoLibros
     {
 
         /// <summary>
@@ -24,30 +24,21 @@ namespace TP4_GRUPO_11
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// ddlTemas control.
+        /// gvLibros control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTemas;
+        protected global::System.Web.UI.WebControls.GridView gvLibros;
 
         /// <summary>
-        /// lblMensaje control.
+        /// lbConsultarOtroTema control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensaje;
-
-        /// <summary>
-        /// lbVerLibros control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbVerLibros;
+        protected global::System.Web.UI.WebControls.LinkButton lbConsultarOtroTema;
     }
 }

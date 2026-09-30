@@ -16,46 +16,38 @@ namespace TP4_GRUPO_11
         {
             if (!IsPostBack)
             {
-                SqlConnection conexion = new SqlConnection(cadenaConexion);
-                conexion.Open();
+                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                {
+                    conexion.Open();
 
-                string consulta = "SELECT * FROM Temas";
+                    string consulta = "SELECT * FROM Temas";
 
-                SqlCommand comando = new SqlCommand(consulta, conexion);
+                    SqlCommand comando = new SqlCommand(consulta, conexion);
 
-                SqlDataReader reader = comando.ExecuteReader();
+                    SqlDataReader reader = comando.ExecuteReader();
 
-                ddlTemas.DataSource = reader;
-                ddlTemas.DataTextField = "Tema";
-                ddlTemas.DataValueField = "IdTema";
-                ddlTemas.DataBind();
+                    ddlTemas.DataSource = reader;
+                    ddlTemas.DataTextField = "Tema";
+                    ddlTemas.DataValueField = "IdTema";
+                    ddlTemas.DataBind();
+                }
 
-                conexion.Close();
+                ddlTemas.Items.Insert(0, new ListItem("--Seleccione un tema--", "0"));
+
+                ddlTemas.SelectedValue = "0";
             }
         }
 
         protected void lbVerLibros_Click(object sender, EventArgs e)
         {
-            pnlSeleccion.Visible = false;
-            pnlListado.Visible = true;
+            if (ddlTemas.SelectedValue == "0")
+            {
+                lblMensaje.Visible = true;
+                lblMensaje.Text = "Seleccione un tema para poder ver los libros.";
+                return;
+            }
 
-            SqlConnection conexion = new SqlConnection(cadenaConexion);
-            conexion.Open();
-
-            string consulta = "SELECT * FROM Libros WHERE IdTema = @IdTema";
-
-            SqlCommand comando = new SqlCommand(consulta, conexion);
-            comando.Parameters.AddWithValue("@IdTema", ddlTemas.SelectedValue);
-
-            SqlDataAdapter adaptador = new SqlDataAdapter(comando);
-
-            DataSet ds = new DataSet();
-            adaptador.Fill(ds, "Libros");
-
-            gvLibros.DataSource = ds.Tables["Libros"];
-            gvLibros.DataBind();
-
-            conexion.Close();
+            Response.Redirect("ListadoLibros.aspx?idTema=" + ddlTemas.SelectedValue);
         }
     }
 }
