@@ -54,10 +54,6 @@
 
     <br /><br />
 
-<<<<<<< HEAD
-    <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" />
-    <asp:Button ID="btnQuitarFiltro" runat="server" Text="Quitar filtro" OnClick="btnQuitarFiltro_Click" />
-=======
 <asp:Button ID="btnFiltrar" runat="server"
     Text="Filtrar"
     OnClick="btnFiltrar_Click"
@@ -70,7 +66,6 @@
 
  <asp:Label ID="lblCompletar" runat="server" ForeColor="Red">
  </asp:Label>
->>>>>>> 82027e3 (Actualizacion ejercicio2)
 
     <br /><br />
 
