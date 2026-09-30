@@ -9,6 +9,73 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            
+    Id Producto:
+    <asp:DropDownList ID="ddlOperadorProducto" runat="server">
+        <asp:ListItem Text="Igual a:" Value="="></asp:ListItem>
+        <asp:ListItem Text="Mayor a:" Value=">"></asp:ListItem>
+        <asp:ListItem Text="Menor a:" Value="<"></asp:ListItem>
+    </asp:DropDownList>
+    <asp:TextBox ID="txtIdProducto" runat="server"></asp:TextBox>
+
+        <asp:CompareValidator
+    ID="cvIdProducto"
+    runat="server"
+    ControlToValidate="txtIdProducto"
+    Operator="DataTypeCheck"
+    Type="Integer"
+    ErrorMessage="Ingresá un número entero en Id Producto."
+    ForeColor="Red"
+    Display="Dynamic"
+    ValidationGroup="Filtros">
+</asp:CompareValidator>
+
+    <br />
+
+    IdCategoria:
+    <asp:DropDownList ID="ddlOperadorCategoria" runat="server">
+        <asp:ListItem Text="Igual a:" Value="="></asp:ListItem>
+        <asp:ListItem Text="Mayor a:" Value=">"></asp:ListItem>
+        <asp:ListItem Text="Menor a:" Value="<"></asp:ListItem>
+    </asp:DropDownList>
+    <asp:TextBox ID="txtIdCategoria" runat="server"></asp:TextBox>
+
+            <asp:CompareValidator
+    ID="cvIdCategoria"
+    runat="server"
+    ControlToValidate="txtIdCategoria"
+    Operator="DataTypeCheck"
+    Type="Integer"
+    ErrorMessage="Ingresá un número entero en Id Categoría."
+    ForeColor="Red"
+    Display="Dynamic"
+    ValidationGroup="Filtros">
+</asp:CompareValidator>
+
+    <br /><br />
+
+<<<<<<< HEAD
+    <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" />
+    <asp:Button ID="btnQuitarFiltro" runat="server" Text="Quitar filtro" OnClick="btnQuitarFiltro_Click" />
+=======
+<asp:Button ID="btnFiltrar" runat="server"
+    Text="Filtrar"
+    OnClick="btnFiltrar_Click"
+    ValidationGroup="Filtros" />
+
+ <asp:Button ID="btnQuitarFiltro" runat="server"
+    Text="Quitar filtro"
+    OnClick="btnQuitarFiltro_Click"
+    CausesValidation="false" />
+
+ <asp:Label ID="lblCompletar" runat="server" ForeColor="Red">
+ </asp:Label>
+>>>>>>> 82027e3 (Actualizacion ejercicio2)
+
+    <br /><br />
+
+    <asp:GridView ID="gvProductos" runat="server">
+    </asp:GridView>
         </div>
     </form>
 </body>
